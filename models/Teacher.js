@@ -1,9 +1,9 @@
 const { UUIDV4, Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Classroom extends Model {}
+class Teacher extends Model {}
 
-Classroom.init(
+Teacher.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,38 +19,14 @@ Classroom.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    allergies: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    medication: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    diet: {
-      type: DataTypes.STRING,
-      allowNull: true,        
-    },
     dob: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
     school_id: {
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
       allowNull: false,
-    },
-    notes: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    teacher_id: {
-      type: DataTypes.STRING,
-      references : {
-        model: 'teacher',
-        key: 'id'
-      },
     },
   },
   {
@@ -58,9 +34,9 @@ Classroom.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'classroom',
+    modelName: 'teacher',
   }
 );
 
-module.exports = Classroom;
+module.exports = Teacher;
 
