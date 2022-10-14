@@ -35,6 +35,13 @@ User.init(
         len: [8],
       },
     },
+    school_id: {
+      type: DataTypes.STRING,
+      references: {
+        model: 'student',
+        key: "school_id"
+      }
+    },
   },
   {
     hooks: {
