@@ -1,10 +1,9 @@
-const { UUIDV4 } = require('sequelize');
 const { Classroom } = require('../models');
 
 const userData = [
   {
     // Teacher login
-    email: 'walterwhite@gmail.com',
+    email: 'walter.white@gmail.com',
     password: 'heisenberg',
   },
   {
@@ -25,7 +24,7 @@ const userData = [
     password: 'password123',
   },
   {
-    email: 'stephenwalker@gmail.com',
+    email: 'stephen.walker@gmail.com',
     password: 'walker25',
   },
 ];

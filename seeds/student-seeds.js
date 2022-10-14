@@ -1,7 +1,7 @@
 const { UUIDV4 } = require('sequelize');
-const { Classroom } = require('../models/');
+const { Classroom } = require('../models');
 
-const classroomData = [
+const studentData = [
   {
     first_name: 'Keith',
     last_name: 'Scott',
@@ -60,6 +60,6 @@ const classroomData = [
   },
 ];
 
-const seedClassroom = () => Classroom.bulkCreate(classroomData);
+const seedStudents = () => Classroom.bulkCreate(studentData);
 
-module.exports = seedClassroom;
+module.exports = seedStudents;
