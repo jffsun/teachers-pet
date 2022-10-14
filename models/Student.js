@@ -36,14 +36,21 @@ Classroom.init(
       allowNull: false,
     },
     // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
-    student_id: {
+    school_id: {
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
-      allowNull: true,
+      allowNull: false,
     },
     notes: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    teacher_id: {
+      type: DataTypes.STRING,
+      references : {
+        model: 'teacher',
+        key: 'id'
+      },
     },
   },
   {
