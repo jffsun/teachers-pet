@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sequelize = require('../../config/connection');
 const { parentCard, teacherRoute} = require('../../models');
-const { Post } = require("./api/userdata-route");
+const { Post } = require("./parentCard-route");
 
 // login (homeroute)
 // gets all required login credentials. email, password and create new user
