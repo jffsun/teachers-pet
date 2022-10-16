@@ -11,4 +11,12 @@ Student.belongsTo(Teacher, {
     foreignKey: 'teacher_id'
 });
 
-module.exports = { Student, Teacher};
+Student.hasOne(User, {
+    foreignKey: 'school_id'
+})
+
+User.belongsTo(Student, {
+    foreignKey: 'school_id'
+});
+
+module.exports = { Student, Teacher, User };

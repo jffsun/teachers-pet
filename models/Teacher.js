@@ -19,10 +19,6 @@ Teacher.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dob: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
     school_id: {
       type: DataTypes.UUID,
       defaultValue: UUIDV4,
