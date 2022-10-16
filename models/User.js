@@ -35,6 +35,7 @@ User.init(
         len: [8],
       },
     },
+    // Rename child_id for clarity?
     school_id: {
       type: DataTypes.STRING,
       references: {

@@ -1,4 +1,4 @@
-const { UUIDV4, Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Student extends Model {}
@@ -36,9 +36,8 @@ Student.init(
     },
     // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
     school_id: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       primaryKey: true,
-      defaultValue: UUIDV4,
       allowNull: false,
     },
     notes: {
