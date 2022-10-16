@@ -1,34 +1,53 @@
-const { Classroom } = require('../models');
+const { User } = require('../models');
 
 const userData = [
   {
     // Teacher login
+    id: 001,
+    name: 'Walter White',
     email: 'walter.white@gmail.com',
     password: 'heisenberg',
+    school_id: 'ueQNJU',
   },
   {
-    // Parents login 
-    email: 'kenneth.scott@gmail.com',
-    password: 'keith123',
+    // Parents with school IDs corresponding to their child
+    id: 002,
+    name: 'Michael Scott',
+    email: 'michael.scott@gmail.com',
+    password: 'michael123',
+    school_id: '329sxf',
   },
   {
+    id: 003,
+    name: 'Tiffany Knox',
     email: 'tiffany.knox@yahoo.com',
     password: 'password321',
+    school_id: 'B8UeaZ',
   },
   {
+    id: 004,
+    name: 'Michael McDonald',
     email: 'michael.mcdonald@hotmail.com',
     password: 'michael47',
+    school_id: '6edmO4',
   },
   {
-    email: 'ruth.campbell@hotmail.com',
+    id: 005,
+    name: 'Isabelle Campbell',
+    email: 'isabelle.campbell@hotmail.com',
     password: 'password123',
+    school_id: '6pQ1t8',
   },
   {
+    id: 006,
+    name: 'Stephen Walker',
     email: 'stephen.walker@gmail.com',
     password: 'walker25',
+    school_id: 'XUClDo',
   },
 ];
 
-const seedUserData = () => Classroom.bulkCreate(userData);
+// Creates the above user login seed data using the User Model
+const seedUserData = () => User.bulkCreate(userData);
 
 module.exports = seedUserData;

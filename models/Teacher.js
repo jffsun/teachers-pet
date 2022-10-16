@@ -1,4 +1,4 @@
-const { UUIDV4, Model, DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Teacher extends Model {}
@@ -19,13 +19,8 @@ Teacher.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    dob: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
     school_id: {
-      type: DataTypes.UUID,
-      defaultValue: UUIDV4,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
