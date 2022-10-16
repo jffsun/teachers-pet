@@ -1,8 +1,9 @@
 const router = require("express").Router();
-const sequelize = require('../config/connection');
-const { Classroom, Userdata} = require('../models');
+const sequelize = require('../../config/connection');
+const { parentCard, teacherRoute} = require('../../models');
 const { Post } = require("./api/userdata-route");
 
+// login (homeroute)
 // gets all required login credentials. email, password and create new user
 router.get('/', (req, res) => {
     console.log(req.session);
@@ -14,16 +15,13 @@ router.get('/', (req, res) => {
         ],
         include: [
             {
-                model: Classroom,
-                attributes: ["first_name", "last_name", "allergies", "medication", "diet", "dob", "student_id", "notes"],
-                include: {
-                    model: Userdata,
-                    attributes: ["id", "name", "email", "password"],
-                }
+                model: parentCard,
+                attributes: ["id", "first_name", "last_name", "allergies", "medication", "diet", "dob", "school_id", "notes", "teacher_id"],
+              
             },
             {
-                model: Userdata,
-                attributes: ["id", "name", "email", "password"],
+                model: teacherRoute,
+                attributes: ["id", "first_name", "last_name", "dob", "school_id"],
             }
         ]
 
