@@ -5,11 +5,11 @@ class Student extends Model {}
 
 Student.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   autoIncrement: true,
+    // },
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -45,7 +45,7 @@ Student.init(
       allowNull: true,
     },
     teacher_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       references : {
         model: 'teacher',
         key: 'id'

@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const loginRoutes = require('../api/logIn-route');
-const parentcardRoutes = require('../api/parentCard-route');
-const teacherRoutes = require('../api/teacher-route');
+const loginRoutes = require('./logIn-route');
+const parentcardRoutes = require('./parentCard-route');
+const teacherRoutes = require('./teacher-route');
 
-router.use('/loginRoutes', loginRoutes);
-router.use('/parentcardRoutes', parentcardRoutes);
-router.use('/teacherRoutes', teacherRoutes);
+router.use('/logIn-route', loginRoutes);
+router.use('/parentCard-Route', parentcardRoutes);
+router.use('/teacher-route', teacherRoutes);
 
 module.exports = router;
