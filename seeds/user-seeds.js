@@ -1,14 +1,14 @@
-const { User } = require('../models');
+const { Parent } = require('../models');
 
-const userData = [
-  {
-    // Teacher login
-    id: 001,
-    name: 'Walter White',
-    email: 'walter.white@gmail.com',
-    password: 'heisenberg',
-    school_id: 'ueQNJU',
-  },
+const parentData = [
+  // {
+  //   // Teacher login
+  //   // id: 001,
+  //   // name: 'Walter White',
+  //   // email: 'walter.white@gmail.com',
+  //   // password: 'heisenberg',
+  //   // school_id: 'ueQNJU',
+  // },
   {
     // Parents with school IDs corresponding to their child
     id: 002,
@@ -48,6 +48,6 @@ const userData = [
 ];
 
 // Creates the above user login seed data using the User Model
-const seedUserData = () => User.bulkCreate(userData);
+const seedParentData = () => Parent.bulkCreate(parentData);
 
-module.exports = seedUserData;
+module.exports = seedParentData;

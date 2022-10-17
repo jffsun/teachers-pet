@@ -5,10 +5,16 @@ class Student extends Model {}
 
 Student.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   autoIncrement: true,
+    // },
+    // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
+    school_id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
       allowNull: false,
-      autoIncrement: true,
     },
     first_name: {
       type: DataTypes.STRING,
@@ -34,18 +40,12 @@ Student.init(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
-    school_id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
-      allowNull: false,
-    },
     notes: {
       type: DataTypes.STRING,
       allowNull: true,
     },
     teacher_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       references : {
         model: 'teacher',
         key: 'id'
