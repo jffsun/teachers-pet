@@ -10,6 +10,12 @@ Student.init(
     //   allowNull: false,
     //   autoIncrement: true,
     // },
+    // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
+    school_id: {
+      type: DataTypes.STRING,
+      primaryKey: true,
+      allowNull: false,
+    },
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -32,12 +38,6 @@ Student.init(
     },
     dob: {
       type: DataTypes.DATE,
-      allowNull: false,
-    },
-    // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
-    school_id: {
-      type: DataTypes.STRING,
-      primaryKey: true,
       allowNull: false,
     },
     notes: {
