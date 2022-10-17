@@ -1,23 +1,15 @@
 // Import models
 const Student = require("./Student");
 const Teacher = require("./Teacher");
-const User = require("./User");
+const Parent = require("./Parent");
 
 // Create associations
-Teacher.hasMany(Student, {
-    foreignKey: 'teacher_id'
-});
+Teacher.hasMany(Student);
 
-Student.belongsTo(Teacher, {
-    foreignKey: 'teacher_id'
-});
+Student.belongsTo(Teacher);
 
-Student.hasOne(User, {
-    foreignKey: 'school_id'
-})
+Student.hasOne(Parent)
 
-User.belongsTo(Student, {
-    foreignKey: 'school_id'
-});
+Parent.belongsTo(Student);
 
-module.exports = { Student, Teacher, User };
+module.exports = { Student, Teacher, Parent };
