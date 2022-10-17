@@ -4,7 +4,7 @@ const Teacher = require("./Teacher");
 const User = require("./User");
 
 // Create associations
-Teacher.hasMany(Student, {
+Teacher.hasOne(Student, {
     foreignKey: 'teacher_id'
 });
 
@@ -19,5 +19,6 @@ Student.hasOne(User, {
 User.belongsTo(Student, {
     foreignKey: 'school_id'
 });
+
 
 module.exports = { Student, Teacher, User };

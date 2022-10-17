@@ -31,7 +31,7 @@ Student.init(
       allowNull: true,        
     },
     dob: {
-      type: DataTypes.DATE,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     // Sequelize's UUID functionality to generate a unique number for the student ID used to verify student's parent(s)
