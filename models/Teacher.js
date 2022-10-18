@@ -11,17 +11,24 @@ Teacher.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    first_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    last_name: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
-    school_id: {
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [8],
+      },
     },
   },
   {
