@@ -10,12 +10,12 @@ class Parent extends Model {
 
 Parent.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   primaryKey: true,
+    //   autoIncrement: true,
+    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,26 +39,12 @@ Parent.init(
     school_id: {
       type: DataTypes.STRING,
       references: {
-        model: 'student',
+        model: "student",
         key: "school_id"
       }
     },
   },
-  {
-    hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
-      
-      // Use the beforeCreate hook to work with data before a new instance is created
-      beforeCreate: async (newUserData) => {
-        // Taking the user's email address, and making all letters lower case before adding it to the database
-        newUserData.email = await newUserData.email.toLowerCase();
-        return newUserData;
-      },
-    },
-    
+  {    
     sequelize,
     timestamps: false,
     freezeTableName: true,
