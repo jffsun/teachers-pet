@@ -9,11 +9,7 @@
     "seed": "node seeds/index.js"
   },
   "keywords": [],
-<<<<<<< HEAD
-  "author": "Kevin Ng",
-=======
   "author": "",
->>>>>>> 911f432340065fa569e9779f1f7dca56d1ddbabe
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.2.2",
@@ -25,10 +21,7 @@
     "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"
-<<<<<<< HEAD
-=======
   },
   "devDependencies": {
->>>>>>> 911f432340065fa569e9779f1f7dca56d1ddbabe
   }
 }
