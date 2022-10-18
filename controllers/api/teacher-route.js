@@ -59,6 +59,26 @@ router.post("/", (req, res) => {
     });
 });
 
+// post request announcement board
+router.post('/', (req, res) => {
+    // req.body should look like this...
+    // {
+    //     announcement: "Field Trip",
+    //     message: "We are going to the San Diego Zoo! Wear comfortable shoes and pack a lunch.",
+        // where: "San Diego Zoo",
+    //     when: 11/15/22,
+
+    // }
+teacherRoute.create({
+    include: [announcements],
+})
+.then((announcements) => res.status(200).json(announcements))
+.catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+});
+});
+
 // update teacher 
 router.put("/:id", (req, res) => {
     // update a teacher by its id value

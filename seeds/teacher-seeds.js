@@ -3,9 +3,9 @@ const { Teacher } = require('../models');
 const teacherData = [
   {
     id: 001,
-    first_name: 'Walter',
-    last_name: 'White',
-    school_id: 'ueQNJU',
+    name: 'Walter White',
+    email: 'w.white@jpwynne.com',
+    password: 'heisenburg',
   },
 ];
 
