@@ -1,14 +1,9 @@
 async function parentLogin(event) {
-  console.log('is this running?')
   // stop the browser from submitting the form so we can do so with javascript
   event.preventDefault();
   // gather data from the form elements on the page
   const email = document.querySelector('#parentEmail').value.trim();
   const password = document.querySelector('#parentPassword').value.trim();
-
-  console.log('logging email and pw')
-  console.log(email)
-  console.log(password)
 
   if (email && password) {
     // send the email and password to the server
@@ -23,11 +18,10 @@ async function parentLogin(event) {
 
     if (response.status === 401) {
       alert("Incorrect Login");
-      // document.location.replace('/login');
     }
 
     if (response.ok) {
-      // document.location.replace('/api/student-info');
+      document.location.replace('/api/parent');
     } else {
       alert(response.statusText);
     }
