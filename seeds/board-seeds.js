@@ -6,7 +6,7 @@ const boardData = [
         message: 'The school is taking a field trip to the San Diego Zoo! Wear comfortable shoes and pack a lunch.',
         where: 'San Diego',
         // Formats the date to SQL date time format
-        when: new Date('+').toISOString().slice(0, 19).replace('T', ' ')
+        when: new Date('2022-10-21').toISOString().slice(0, 19).replace('T', ' ')
     },
     {
         title: 'School Play',
