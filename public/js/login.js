@@ -21,7 +21,7 @@ async function parentLogin(event) {
     }
 
     if (response.ok) {
-      document.location.replace('/api/parent');
+      document.location.replace('api/parent');
     } else {
       alert(response.statusText);
     }

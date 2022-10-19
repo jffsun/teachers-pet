@@ -1,38 +1,76 @@
 const router = require("express").Router();
-const { Student, Parent, Board } = require("../../models");
+const { Student, Teacher, Parent, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 
 // get all announcements from annoucement board
 // router.get("/", auth, (req, res) => {
 
-// router.get("/:school_id", auth, (req, res) => {
-router.get("/:school_id", (req, res) => {
+router.get("/", auth, async (req, res) => {
+    
+    // get school_id from session
+    // const schoolID = req.session.school_id;
 
-    // get all announcements from announcement board
-    const getAllAnnouncements = Board.findAll();
+    try {
+        // const getAllAnnouncements = Board.findAll();
 
-    // locates one child by its id value
-    const getStudentInfo =  Student.findOne({
-        where: {
-            school_id: req.params.school_id
-        }
-    });
+        // locates one child by its id value
+        const studentData = await Student.findOne({
+            include: [{ model: Teacher }],
 
-   Promise
-    .allSettled([getAllAnnouncements, getStudentInfo])
-    .then(infoAndAnnouncements => {
-        if (!infoAndAnnouncements) {
-            res.status(404).json({ message: "No child found"});
-            return;
-        }
-        res.json(infoAndAnnouncements);
-    })
-    .catch(err => {
+            attributes: [
+            'first_name',
+            'last_name',
+            'allergies',
+            'medication',
+            'diet',
+            'dob',
+            'notes',
+            'teacher_id',
+            ],
+            where: {
+                
+                school_id: req.session.school_id,
+            }
+        })
+        console.log('THIS IS STUDENT DATA');
+        console.log(studentData);
+
+        const studentCard = studentData.get({plain: true});
+
+        console.log('STUDENT CARD');
+        console.log(studentCard);
+
+        res.render('studentCard', { studentCard, loggedIn: req.session.loggedIn });
+    } catch (err) {
         console.log(err)
         res.status(500).json(err)
-    });
-});
+    };
+})
+
+// GET route for all announcements 
+// router.get("/", auth, async (req, res) => {
+    
+//     try {
+
+//         // locates one child by its id value
+//         const boardData = await Board.findAll()
+//         console.log('THIS IS BOARD DATA');
+//         console.log(boardData);
+
+//         const boardCard = boardData.get({plain: true});
+
+//         console.log('BOARD CARD');
+//         console.log(boardCard);
+
+//         // TO DO: CREATE PARTIAL HANDLEBAR FOR ANNOUNCEMENT
+//         res.render('boardCard', { boardCard, loggedIn: req.session.loggedIn });
+//     } catch (err) {
+//         console.log(err)
+//         res.status(500).json(err)
+//     };
+// })
+
     // Student.findOne({
     //     where: {
     //         school_id: req.params.school_id,
@@ -50,8 +88,15 @@ router.get("/:school_id", (req, res) => {
     //     res.status(500).json(err)
     // });
 
+
+
+
+
+
+
 // update a child by its id value
-router.put("/:id", (req, res) => {
+router.put("/", (req, res) => {
+    const schoolID = req.session.school_id;
     parentCard.update(req.body, {
         where: {
             id: req.params.id,
@@ -70,6 +115,24 @@ router.put("/:id", (req, res) => {
         });
 });
 
+router.put('/:id', async (req, res) => {
+    try {
+        const updatePost = await Post.update(req.body, {
+            
+            where : {
+                id: req.params.id
+            }
+        
+        }); 
+
+        res.status(200).json(updatePost);
+        
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+   
 // router.delete("/:id", (req, res) => {
 //     // delete a child by its id value
 //     parentCard.destroy({
