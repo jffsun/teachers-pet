@@ -2,6 +2,13 @@ const router = require('express').Router();
 const { Teacher, Parent, Student} = require("../models");
 
 
+// Parent's login
+router.post('/', async (req, res) => {
+    try {
+        // Find the parent who matches with the email in the database
+        const parentCheck = await Parent.findOne({ where: {Parent_email:  req.body.Parent_email}});
+
+
 // Render login handlebars
 router.post('/parent', async (req, res) => {
      try {
@@ -17,6 +24,7 @@ router.post('/parent', async (req, res) => {
                res.status(401).json({ message: 'Incorrect email or password, please try again.' });
                return; 
           }
+
 
           console.log(parentCheck.school_id)
 
