@@ -7,6 +7,11 @@ router.post('/', async (req, res) => {
     try {
         // Find the parent who matches with the email in the database
         const parentCheck = await Parent.findOne({ where: {Parent_email:  req.body.Parent_email}});
+    }
+    catch {
+        
+    }
+});
 
 
 // Render login handlebars
