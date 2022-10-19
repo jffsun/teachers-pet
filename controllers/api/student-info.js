@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { Student, Parent } = require("../../models");
-const auth = require('../utils/auth'); 
+const auth = require('../../utils/auth'); 
 
 // parents viewing student's data
 // '/api/student-info' endpoint
