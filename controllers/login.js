@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Teacher, Parent } = require("../../models");
+const { Teacher, Parent } = require("../models");
 
 
 // Parent's login
@@ -11,8 +11,8 @@ router.post('/', async (req, res) => {
         // If there is no match with the username, send a incorrect message to the user and have them retry
         if (!parentCheck) {
         res.status(400).json({ message: 'Incorrect email or password, please try again.' });
-        return;
-        }​
+        return; 
+        }
         // Verifies if the password matches the parent's email
         const validPassword = await parentCheck.checkPw(req.body.password);
         
@@ -47,7 +47,7 @@ router.post('/', async (req, res) => {
         if (!teacherCheck) {
         res.status(400).json({ message: 'Incorrect email or password, please try again.' });
         return;
-        }​
+        }
         // Verifies if the password matches the parent's email
         const validPassword = await teacherCheck.checkPw(req.body.password);
         
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
         if (!validPassword) {
         res.status(400).json({ message: 'Incorrect email or password, please try again.' });
         return;
-        }​
+        }
 
         // Session variables based on the current logged in parent or teacher
         req.session.save(() => {
