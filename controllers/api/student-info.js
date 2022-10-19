@@ -4,6 +4,15 @@ const auth = require('../../utils/auth');
 
 // parents viewing student's data
 // '/api/student-info' endpoint
+
+router.get('/', (req, res) => {
+    res.render('studentinfo');
+});
+
+router.get('/student-info', (req, res) => {
+    res.render('studentinfo');
+});
+
 router.get("/", auth, (req, res) => {
     
     // find all children
