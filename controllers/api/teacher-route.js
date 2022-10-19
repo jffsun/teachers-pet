@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { teacherRoute, parentCard } = require("../../models");
+const auth = require('../utils/auth'); 
 
 // teacher route data 
 
@@ -36,8 +37,7 @@ router.get("/:id", (req, res) => {
         console.log(err);
         res.status(500).json(err);
     });
-});
-
+});​
 // add a teacher
 router.post("/", (req, res) => {
     teacherRoute.create({
@@ -58,27 +58,7 @@ router.post("/", (req, res) => {
         res.status(500).json(err);
     });
 });
-
-// post request announcement board
-router.post('/', (req, res) => {
-    // req.body should look like this...
-    // {
-    //     announcement: "Field Trip",
-    //     message: "We are going to the San Diego Zoo! Wear comfortable shoes and pack a lunch.",
-        // where: "San Diego Zoo",
-    //     when: 11/15/22,
-
-    // }
-teacherRoute.create({
-    include: [announcements],
-})
-.then((announcements) => res.status(200).json(announcements))
-.catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
-});
-});
-
+​
 // update teacher 
 router.put("/:id", (req, res) => {
     // update a teacher by its id value
@@ -99,7 +79,7 @@ router.put("/:id", (req, res) => {
             res.status(500).json(err)
         });
 });
-
+​
 // delete teacher
 router.delete("/:id", (req, res) => {
     // delete teacher by its id value
@@ -120,5 +100,17 @@ router.delete("/:id", (req, res) => {
         res.status(500).json(err);
     });
 });
-
+​
+// logout, delete session.
+router.post('/', (req, res) => {
+    if (req.session.logged_in) {
+      // Remove the session variables
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).end();
+    }
+});
+​
 module.exports = router;
