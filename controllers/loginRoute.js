@@ -27,8 +27,7 @@ router.post('/parent', async (req, res) => {
           });
           
       } catch (err) {
-          console.log(err);
-          res.status(500).json(err);
+          res.render('404')
       }
 });
 

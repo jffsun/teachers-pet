@@ -72,7 +72,32 @@ router.get("/", auth, async (req, res) => {
         console.log(err)
         res.status(500).json(err)
     };
+
+})
+
+// PUT request to update child information data
+router.put('/', auth, async (req, res) => {
+    try {
+        const updateChild = await Student.update(
+            {
+                allergies: req.body.allergies,
+                medication: req.body.medication,
+                diet: req.body.diet,
+                notes: req.body.notes
+            },
+            {    
+            where: {
+                school_id: req.session.school_id
+            }
+        });
+        res.status(200).json(updateChild);
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
+=======
 });
+
 
 // logout, delete session.
 router.post('/', (req, res) => {
