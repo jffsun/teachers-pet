@@ -1,3 +1,4 @@
+// function to begin LOGIN and credential verification
 async function parentLogin(event) {
   // stop the browser from submitting the form so we can do so with javascript
   event.preventDefault();
@@ -17,7 +18,8 @@ async function parentLogin(event) {
     });
 
     if (response.status === 401) {
-      alert("Incorrect Login");
+      alert("Incorrect email or password.");
+      return;
     }
 
     if (response.ok) {
@@ -48,9 +50,8 @@ async function teacherLogin(event) {
 
     if (response.ok) {
       document.location.replace('api/teacher');
-      console.log('RESPONSE SUCCESS')
     } else {
-      alert(response.statusText);
+      alert("Incorrect email or password.");;
     }
   }
 };

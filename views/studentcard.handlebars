@@ -1,23 +1,69 @@
 {{!-- Logo for Teacher's Pet --}}
 <header>
-    <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="250" height="250">
+  <div class="pt-3 text-center bg-primary opacity-100" style="margin-top: 0px;">
+  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="100" height="100">
+  <h1 class="mb-1 text-light">Parent's Portal</h1>
+  <nav class="text-right">
+    <a class="w-5 btn mt-2 mb-2 mr-2 btn-med btn-warning" href="/api/parent/board"> Message Board</a>
+  </nav>  
+  </div>
 </header>
 
 {{!-- this is the student info update container --}}
-<main class="container child-info-update border border-info rounded">
+<main class="container child-update border w-25 mt-2 border-info rounded align-content-center">
   <h3 class=""></h3>
   <h4>Teacher: {{studentCard.teacher.name}}</h4>
-  <h4>Name: {{studentCard.first_name}} {{studentCard.last_name}}</h4>
+  <h4>Student Name: {{studentCard.first_name}} {{studentCard.last_name}}</h4>
   <h4>Date of Birth: {{studentCard.dob}}</h4>
-  <input class="form-control" id="allergyInput" placeholder="Allergies: {{studentCard.allergies}}"> </input>
-  <input class="form-control" id="medicationInput" placeholder="Medication"> </input>
-  <input class="form-control" id="dietInput" placeholder="Diet"> </input>
-  <input class="form-control" id="notesInput" placeholder="Notes"> </input>
-  <button type="submit" id="updateSubmit">Update Student Information</button>
+
+  <div class="form-floating text-left">
+    <label>Allergies</label>
+    {{#if studentCard.allergies}}
+    <input class="form-control w-100" id="allergyInput" value="{{studentCard.allergies}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="allergyInput" placeholder="Allergies"> </input>
+    {{/if}}
+  </div>
+
+  <div class="form-floating text-left">
+    <label>Medication</label>
+    {{#if studentCard.medication}}
+    <input class="form-control w-100" id="medicationInput" value="{{studentCard.medication}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="medicationInput" placeholder="Medication"> </input>
+    {{/if}}
+  </div>
+
+  <div class="form-floating text-left">
+    <label>Diet</label>
+    {{#if studentCard.diet}}
+    <input class="form-control w-100" id="dietInput" value="{{studentCard.diet}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="dietInput" placeholder="Diet"> </input>
+    {{/if}}
+  </div>
+  
+  <div class="form-floating text-left">
+    <label>Notes</label>
+    {{#if studentCard.notes}}
+    <input class="form-control w-100" id="notesInput" value="{{studentCard.notes}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="notesInput" placeholder="Notes"> </input>
+    {{/if}}
+  </div>  
+
+  <button class="w-75 btn mt-2 mb-2 btn-med btn-primary updateSubmit" type="submit" id="updateSubmit">Update Student Information</button>
 </main>
+
+<footer class="loggingOut text-center">
+  <div class="w-50 m-auto">
+    <button class="w-25 btn mt-2 mb-2 btn-med btn-danger" type="submit" id="logOut">Logout</button>
+  </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- javascript file-->
 <script src="/js/updatecard.js"></script>
+<script src="/js/logOut.js"></script>

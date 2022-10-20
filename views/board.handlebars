@@ -1,8 +1,18 @@
+<header>
+  <div class="pt-3 text-center bg-primary opacity-100" style="margin-top: 0px;">
+  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="100" height="100">
+  <h1 class="mb-1 text-light">Message Board</h1>
+  <nav class="text-left">
+    <a class="w-5 btn mt-2 mb-2 ml-2 btn-med btn-warning updateSubmit" href="/api/parent">Go back</a>
+  </nav>
+  </div>
+</header>
+
 <section class="container">
-  <section class="flex-row justify-center">
-    <!-- For each announcement that belongs to the board, the announcement-details partial is used to render each announcement's data -->
-    {{#each board.announcements as |announcement|}}
-    {{> announcement-details}}
+  <div class="flex-row overflow-auto list">
+    <!-- for each announcement that belongs to the board, the announcement-details partial is used to render each announcement's data -->
+    {{#each announcements as |announcement|}}
+    {{> board-details}}
     {{/each}}
-  </section>
+  </div>
 </section>
