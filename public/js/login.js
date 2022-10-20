@@ -47,7 +47,8 @@ async function teacherLogin(event) {
     });
 
     if (response.ok) {
-      document.location.replace('/teacher');
+      document.location.replace('api/teacher');
+      console.log('RESPONSE SUCCESS')
     } else {
       alert(response.statusText);
     }

@@ -14,20 +14,16 @@ router.post('/parent', async (req, res) => {
                return; 
           }
 
-
           console.log(parentCheck.school_id) //make sure to clear
           
-          const studentCard = await Student.findOne({where: {school_id: parentCheck.school_id}})
-          
-          console.log('student')
-          console.log(studentCard)
+          // Redundant because we already have school_id from parent. Remove?
+            //   const studentCard = await Student.findOne({where: {school_id: parentCheck.school_id}})
+
           // Session variables based on the current logged in parent or teacher
           req.session.save(() => {
           req.session.logged_in = true;
           req.session.school_id = parentCheck.school_id;
-          console.log("oasdijfkl;asdkfgladkfjnasl");
-          res.json({ user: parentCheck, studentCard: studentCard, message: 'Logged in successfully!'});
-          console.log(parentCheck.school_id);
+          res.json({ user: parentCheck, message: 'Logged in successfully!'});
           });
           
       } catch (err) {
@@ -38,26 +34,22 @@ router.post('/parent', async (req, res) => {
 
 router.post('/teacher', async (req, res) => {
      try {
-         // Find the parent who matches with the email in the database
+        console.log('TEACHER LOGIN ATTEMPT')
+
+         // Find the teacher who matches with the email and password in the database
          const teacherCheck = await Teacher.findOne({ where: {email:  req.body.email, password: req.body.password}});
- 
+        
          // If there is no match with the username, send a incorrect message to the user and have them retry
          if (!teacherCheck) {
          res.status(400).json({ message: 'Incorrect email or password, please try again.' });
          return; 
          }
 
- 
-         console.log(teacherCheck.id)
-
-         const studentCard = await Student.findAll()
-         
-         console.log('student')
-         console.log(studentCard)
          // Session variables based on the current logged in parent or teacher
          req.session.save(() => {
          req.session.logged_in = true;
-         res.json({ user: teacherCheck, studentCard: studentCard, message: 'Logged in successfully!'})
+         res.json({ user: teacherCheck, message: 'Logged in successfully!'})
+         console.log('TEACHER LOGIN SUCCESSFUL')
          });
  
      } catch (err) {

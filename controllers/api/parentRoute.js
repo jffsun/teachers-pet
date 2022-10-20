@@ -24,52 +24,76 @@ router.get("/", auth, async (req, res) => {
             'allergies',
             'medication',
             'diet',
-            'dob',
+
+            // convert dob from sql date format to USA date format 
+            [
+                sequelize.fn
+                (
+                  "DATE_FORMAT", 
+                  sequelize.col("dob"), 
+                  "%m/%d/%Y"
+                ),
+                "dob",
+              ],
             'notes',
             'teacher_id',
             ],
             where: {
-                
                 school_id: req.session.school_id,
             }
         })
-        console.log('THIS IS STUDENT DATA');
-        console.log(studentData);
 
+        // serialize retrieved student sql data
         const studentCard = studentData.get({plain: true});
 
         console.log('STUDENT CARD');
         console.log(studentCard);
 
-        res.render('studentCard', { studentCard, loggedIn: req.session.loggedIn });
+        // render attributes to studentcard.handlebars
+        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    };
+});
+
+// GET route for all announcements 
+router.get("/", auth, async (req, res) => {
+    
+    try {
+        // locates one child by its id value
+        const boardData = await Board.findAll({
+            attributes: [
+                'title',
+                'message',
+                'where',
+                // convert dob from sql date format to USA date format 
+                [
+                    sequelize.fn
+                    (
+                      "DATE_FORMAT", 
+                      sequelize.col("when"), 
+                      "%m/%d/%Y"
+                    ),
+                    "when",
+                  ],
+            ],
+        });
+        console.log('THIS IS BOARD DATA');
+        console.log(boardData);
+
+        const boardCard = boardData.get({plain: true});
+
+        console.log('BOARD CARD');
+        console.log(boardCard);
+
+        // TO DO: CREATE PARTIAL HANDLEBAR FOR ANNOUNCEMENT
+        // res.render('board', { boardCard, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     };
 })
-
-// GET route for all announcements 
-// router.get("/", auth, async (req, res) => {
-    
-//     try {
-
-//         // locates one child by its id value
-//         const boardData = await Board.findAll()
-//         console.log('THIS IS BOARD DATA');
-//         console.log(boardData);
-
-//         const boardCard = boardData.get({plain: true});
-
-//         console.log('BOARD CARD');
-//         console.log(boardCard);
-
-//         // TO DO: CREATE PARTIAL HANDLEBAR FOR ANNOUNCEMENT
-//         res.render('boardCard', { boardCard, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//         console.log(err)
-//         res.status(500).json(err)
-//     };
-// })
 
     // Student.findOne({
     //     where: {
@@ -87,11 +111,6 @@ router.get("/", auth, async (req, res) => {
     //     console.log(err)
     //     res.status(500).json(err)
     // });
-
-
-
-
-
 
 
 // update a child by its id value

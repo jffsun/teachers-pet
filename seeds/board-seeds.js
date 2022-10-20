@@ -36,7 +36,5 @@ const boardData = [
 
 // creates the above announcement seed data using teacher route
 const seedsBoard = () => Board.bulkCreate(boardData);
-console.log(boardData[1].when);
-console.log(boardData[0].when);
 
 module.exports = seedsBoard;
