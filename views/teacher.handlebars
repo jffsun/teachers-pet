@@ -1,0 +1,43 @@
+<header>
+ <div class="pt-3 text-center bg-primary opacity-100" style="margin-top: 0px;">
+  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="100" height="100">
+  <h1 class="mb-1 text-light">Teacher's Portal</h1>
+  <nav class="text-right">
+    <a class="w-5 btn mt-2 mb-2 mr-2 btn-med btn-warning" href="/api/teacher/teacherboard"> Message Board</a>
+  </nav>
+  </div>
+</header>
+
+<aside>
+  {{!-- this is where the messageboard will go --}}
+</aside>
+
+<main>
+  {{!-- this is where the student data table will go --}}
+  <h2>Handlebars template to populate a table</h2>
+  <h3>Students</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Allergies</th>
+        <th>Medication</th>
+        <th>Diet</th>
+        <th>DOB</th>
+        <th>School ID</th>
+        <th>NOTES</th>
+        <th>Teacher ID</th>
+      </tr>
+
+    </thead>
+    {{#each studentCharts as |studentChart|}}
+    {{>chart}}
+    {{/each}}
+  </table>
+
+<footer class="loggingOut text-center">
+  <div class="w-50 m-auto">
+    <button class="w-25 btn mt-2 mb-2 btn-med btn-danger" type="submit" id="logOut">Logout</button>
+  </div>
+</footer>
+<script src="/js/logOut.js"></script>

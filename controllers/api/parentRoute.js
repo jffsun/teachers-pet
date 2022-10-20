@@ -6,7 +6,6 @@ const sequelize = require('../../config/connection');
 // get their student's info and all announcements from annoucement board
 router.get("/", auth, async (req, res) => {
     try {
-
         // locates one child by its id value
         const studentData = await Student.findOne({
             include: [{ model: Teacher }],
@@ -34,7 +33,16 @@ router.get("/", auth, async (req, res) => {
                 school_id: req.session.school_id,
             }
         })
+        const studentCard = studentData.get({plain: true});
+        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    } 
+})
 
+router.get("/board", auth, async (req, res) => {
+    try {    
         const boardData = await Board.findAll({
             attributes: [
                 'title',
@@ -51,29 +59,19 @@ router.get("/", auth, async (req, res) => {
                     "when",
                   ],
             ],
-            raw: true,
-            nest: true,
         });
-        console.log('THIS IS BOARD DATA');
-        console.log(boardData);
 
-        // serialize retrieved student sql data
-        const studentCard = studentData.get({plain: true});
+        const announcements = boardData.map((announcement) =>
+        announcement.get({ plain: true })
+        );
+        res.render('board', { announcements});
 
-        console.log('STUDENT CARD');
-        console.log(studentCard);
-
-        // render attributes to studentcard.handlebars
-        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
-
-        // TO DO: CREATE PARTIAL HANDLEBAR FOR ANNOUNCEMENT
-        // res.render('board', { boardCard, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     };
-
 })
+
 
 // PUT request to update child information data
 router.put('/', auth, async (req, res) => {
