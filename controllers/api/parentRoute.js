@@ -95,82 +95,26 @@ router.get("/", auth, async (req, res) => {
     };
 })
 
-    // Student.findOne({
-    //     where: {
-    //         school_id: req.params.school_id,
-    //     },
-    // })
-    // .then(studentInfoData => {
-    //     if (!studentInfoData) {
-    //         res.status(404).json({ message: "No child found"});
-    //         return;
-    //     }
-    //     res.json(studentInfoData);
-    // })
-    // .catch(err => {
-    //     console.log(err)
-    //     res.status(500).json(err)
-    // });
-
-
-// update a child by its id value
-router.put("/", (req, res) => {
-    const schoolID = req.session.school_id;
-    parentCard.update(req.body, {
-        where: {
-            id: req.params.id,
-        },
-    })
-        .then(dbparentCardData => {
-            if (!dbClassroomData) {
-                res.status(404).json({ message: "no child found with this id"});
-                return;
-            }
-            res.json(dbparentCardData);
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json(err)
-        });
-});
-
-router.put('/:id', async (req, res) => {
+// PUT request to update child information data
+router.put('/', auth, async (req, res) => {
     try {
-        const updatePost = await Post.update(req.body, {
-            
-            where : {
-                id: req.params.id
+        const updateChild = await Student.update(
+            {
+                allergies: req.body.allergies,
+                medication: req.body.medication,
+                diet: req.body.diet,
+                notes: req.body.notes
+            },
+            {    
+            where: {
+                school_id: req.session.school_id
             }
-        
-        }); 
-
-        res.status(200).json(updatePost);
-        
+        });
+        res.status(200).json(updateChild);
     } catch (err) {
         res.status(500).json(err)
     }
 })
-
-   
-// router.delete("/:id", (req, res) => {
-//     // delete a child by its id value
-//     parentCard.destroy({
-//         where: {
-//             id: req.params.id,
-//         },
-//     })
-//         .then(dbparentCardData => {
-//             if (!dbparentCardData) {
-//                 res.status(404).json({ message: "no child found with that id"});
-//                 return;
-//             }
-//             res.json(dbparentCardData);
-//         })
-//         .catch(err => {
-//             console.log(err)
-//             res.status(500).json(err)
-//         });
-// });
 
 // logout, delete session.
 router.post('/', (req, res) => {

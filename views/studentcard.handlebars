@@ -1,23 +1,223 @@
+JeffyT
+#3401
+Momoyao BARD MAIN
+
+AndyWhale — 10/17/2022
+<header>
+    <img class="mb-4 align-items-center" src="/public/images/logo.png" alt="" width="250" height="250">
+</header>
+
+<main class="container border form-signin mt-2 w-25 border-info rounded">
+  <form>
+Expand
+login.handlebars
+2 KB
+for u to push
+JeffyT — 10/17/2022
+okay ill wait for jeff to push
+JeffyT — 10/18/2022
+how you feeling buddy
+bhaahaha
+AndyWhale — 10/18/2022
+im feeling better holy moly
+im stuck on
+how we can tell handlebars
+which file to display on what endpoint
+JeffyT — 10/18/2022
+i kinda have that figured out
+i was telling jeff
+we can go through it during class today
+cause i think we kinda worked backwards
+but lets wait for TA to leave
+cause i am one hundred percent sure
+our API setup is messed up
+AndyWhale — 10/18/2022
+its just echoing like crazy
+JeffyT — 10/18/2022
+im muted
+on everything
+besides zoom
+AndyWhale — 10/18/2022
+yeah
+can you mute on zoom so i can ask you on disc
+JeffyT — 10/18/2022
+i just turned my mic off
+AndyWhale — 10/18/2022
+ill send the files over
+and you push
+JeffyT — 10/18/2022
+lols okay
+i really dont mind
+cause its your contribution
+AndyWhale — 10/18/2022
+nono
+screw that
+JeffyT — 10/18/2022
+okay sure. thanks if you dont mind
+AndyWhale — 10/18/2022
+i sent u a lot of stuff
+on slack
+JeffyT — 10/18/2022
+yeah im doing it right meow
+AndyWhale — 10/18/2022
+nice
+JeffyT — 10/18/2022
+im gonna push
+JeffyT — 10/18/2022
+https://github.com/jorguzman100/project2/blob/master/public/js/login.js
+GitHub
+project2/login.js at master · jorguzman100/project2
+Bootcamp project 2. Contribute to jorguzman100/project2 development by creating an account on GitHub.
+project2/login.js at master · jorguzman100/project2
+JeffyT — Yesterday at 9:40 PM
+<div class="container">   <div class="jumbotron mt-4">     <h1 class="display-4 text-center">404 Not Found       <span role="img" aria-label="Face with rolling eyes">🙄</span>     </h1>     <a href="/">← Back To Home</a>   </div> </div>
+JeffyT — Yesterday at 10:05 PM
+honestly
+the last two days we did project
+i did zero addy
+im cracked right now
+LOOOOLS
+AndyWhale — Today at 12:48 AM
+const router = require("express").Router();
+const { Student, Teacher, Parent, Board } = require("../../models");
+const auth = require('../../utils/auth'); 
+const sequelize = require('../../config/connection');
+
+// get all announcements from annoucement board
+Expand
+parentRoute.js
+4 KB
+this goes inside controller/api
+const router = require('express').Router();
+const loginRoute = require('./loginRoute.js')
+const apiRoutes = require('./api');
+
+router.get('/', (req, res) => {
+    res.render('login');
+Expand
+index.js
+1 KB
+const router = require('express').Router();
+const { Teacher, Parent, Student} = require("../models");
+
+// Render login handlebars
+router.post('/parent', async (req, res) => {
+     try {
+Expand
+loginRoute.js
+3 KB
+these two go in controller folder
+async function logout() {
+    // make a post request to destroy the session on the backend 
+      const response = await fetch('/api/parent', {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' }
+      });
+Expand
+logout.js
+1 KB
+const updateCard = async (event) => {
+    event.preventDefault();
+
+    const allergies = document.querySelector('#allergyInput').value.trim();
+    const medication = document.querySelector('#medicationInput').value.trim();
+    const diet = document.querySelector('#dietInput').value.trim();
+Expand
+updatecard.js
+2 KB
+this goes in public/js
+these two*
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+Expand
+main.handlebars
+1 KB
+views/layout
+this goes inside the view folder
 {{!-- Logo for Teacher's Pet --}}
 <header>
     <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="250" height="250">
 </header>
 
 {{!-- this is the student info update container --}}
-<main class="container child-info-update border border-info rounded">
+Expand
+studentcard.handlebars
+3 KB
+this goes inside the view folder
+<div class="container">
+  <div class="jumbotron mt-4">
+    <h1 class="display-4 text-center">404 Not Found
+      <span role="img" aria-label="Face with rolling eyes">&#128580;</span>
+    </h1>
+    <a href="/" id ="goBack" type="submit">← Back To Home</a>
+Expand
+404.handlebars
+1 KB
+﻿
+{{!-- Logo for Teacher's Pet --}}
+<header>
+    <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="250" height="250">
+</header>
+
+{{!-- this is the student info update container --}}
+<main class="container child-update border w-25 border-info rounded align-content-center">
   <h3 class=""></h3>
   <h4>Teacher: {{studentCard.teacher.name}}</h4>
-  <h4>Name: {{studentCard.first_name}} {{studentCard.last_name}}</h4>
+  <h4>Student Name: {{studentCard.first_name}} {{studentCard.last_name}}</h4>
   <h4>Date of Birth: {{studentCard.dob}}</h4>
-  <input class="form-control" id="allergyInput" placeholder="Allergies: {{studentCard.allergies}}"> </input>
-  <input class="form-control" id="medicationInput" placeholder="Medication"> </input>
-  <input class="form-control" id="dietInput" placeholder="Diet"> </input>
-  <input class="form-control" id="notesInput" placeholder="Notes"> </input>
-  <button type="submit" id="updateSubmit">Update Student Information</button>
+
+  <div class="form-floating text-left">
+    <label>Allergies</label>
+    {{#if studentCard.allergies}}
+    <input class="form-control w-100" id="allergyInput" value="{{studentCard.allergies}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="allergyInput" placeholder="Allergies"> </input>
+    {{/if}}
+  </div>
+
+  <div class="form-floating text-left">
+    <label>Medication</label>
+    {{#if studentCard.medication}}
+    <input class="form-control w-100" id="medicationInput" value="{{studentCard.medication}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="medicationInput" placeholder="Medication"> </input>
+    {{/if}}
+  </div>
+
+  <div class="form-floating text-left">
+    <label>Diet</label>
+    {{#if studentCard.diet}}
+    <input class="form-control w-100" id="dietInput" value="{{studentCard.diet}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="dietInput" placeholder="Diet"> </input>
+    {{/if}}
+  </div>
+  
+  <div class="form-floating text-left">
+    <label>Notes</label>
+    {{#if studentCard.notes}}
+    <input class="form-control w-100" id="notesInput" value="{{studentCard.notes}}"></input>
+    {{else}}
+    <input class="form-control w-100" id="notesInput" placeholder="Notes"> </input>
+    {{/if}}
+  </div>  
+
+  <button class="w-75 btn mt-2 mb-2 btn-med btn-primary updateSubmit" type="submit" id="updateSubmit">Update Student Information</button>
 </main>
+
+<footer class="loggingOut text-center">
+  <div class="w-50 m-auto">
+    <button class="w-25 btn mt-2 mb-2 btn-med btn-danger" type="submit" id="logOut">Logout</button>
+  </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <!-- javascript file-->
 <script src="/js/updatecard.js"></script>
+<script src="/js/logOut.js"></script>
