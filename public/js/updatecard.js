@@ -5,10 +5,6 @@ const updateCard = async (event) => {
     const medication = document.querySelector('#medicationInput').value.trim();
     const diet = document.querySelector('#dietInput').value.trim();
     const notes = document.querySelector('#notesInput').value.trim();
-    console.log(allergies);
-    console.log(medication);
-    console.log(diet);
-    console.log(notes);
     
     fetch('/api/parent', {
         method: 'PUT',
@@ -29,12 +25,6 @@ const updateCard = async (event) => {
         .then(data => console.log(data))
         .then(alert('Information Updated!'))
         .catch(error => console.log(error));
-    // console.log(response);
-    // if (response.ok) {
-    //     alert('Information Updated!')
-    // } else {
-    //     alert("Something went wrong. Can't update information.")
-    // }
 }
 
 document.querySelector('.updateSubmit').addEventListener('click', updateCard);

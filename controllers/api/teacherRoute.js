@@ -40,11 +40,7 @@ router.get("/", auth, async (req, res) => {
     studentChart.get({ plain:true})
     );
 
-    const studentChart = allStudents.map((announcement) =>
-    announcement.get({ plaing:true})
-    );
-
-    res.render('teacher', { studentChart, loggedIn: req.session.loggedIn});
+    res.render('teacher', { studentCharts, loggedIn: req.session.loggedIn});
 
     } catch (err) {
         console.log(err)
@@ -77,6 +73,7 @@ router.get("/teacherboard", auth, async (req, res) => {
     try {    
         const boardData = await Board.findAll({
             attributes: [
+                'id',
                 'title',
                 'message',
                 'where',
@@ -108,12 +105,12 @@ router.get("/teacherboard", auth, async (req, res) => {
 router.put("/", auth, async (req, res) => {
     
     try {
-    // TO DO: GET ID OF ANNOUNCEMENT CLICKED
-    const announcementID = 1;
+    // // TO DO: GET ID OF ANNOUNCEMENT CLICKED
+    // const announcementID = 1;
 
     const updatedAnnouncement = await Board.update({
         where: {
-            id: announcementID,
+            id: req.body.id,
         },
         attributes: {
             title: req.body.title,
