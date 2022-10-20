@@ -1,13 +1,16 @@
 {{!-- Logo for Teacher's Pet --}}
 <header>
-  <div class="p-2 text-center bg-primary opacity-100" style="margin-top: 0px;">
-  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="150" height="150">
-  <h1 class="mb-3">Teacher's Pet</h1>
+  <div class="pt-3 text-center bg-primary opacity-100" style="margin-top: 0px;">
+  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="100" height="100">
+  <h1 class="mb-1 text-light">Parent's Portal</h1>
+  <nav class="text-right">
+    <a class="w-5 btn mt-2 mb-2 mr-2 btn-med btn-warning" href="/api/parent/board"> Message Board</a>
+  </nav>  
   </div>
 </header>
 
 {{!-- this is the student info update container --}}
-<main class="container child-update border w-25 border-info rounded align-content-center">
+<main class="container child-update border w-25 mt-2 border-info rounded align-content-center">
   <h3 class=""></h3>
   <h4>Teacher: {{studentCard.teacher.name}}</h4>
   <h4>Student Name: {{studentCard.first_name}} {{studentCard.last_name}}</h4>
@@ -51,12 +54,6 @@
 
   <button class="w-75 btn mt-2 mb-2 btn-med btn-primary updateSubmit" type="submit" id="updateSubmit">Update Student Information</button>
 </main>
-
-<aside>
-  {{#each announcements as |announcement|}}
-  {{> board-details}}
-  {{/each}}
-</aside>
 
 <footer class="loggingOut text-center">
   <div class="w-50 m-auto">

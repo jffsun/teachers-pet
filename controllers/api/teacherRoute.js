@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Student, Parent, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
-const createTable = require('../../public/js/table.js')
+const sequelize = require('../../config/connection');
 
 // teacher viewing all student records
 router.get("/", auth, async (req, res) => {
@@ -26,12 +26,11 @@ router.get("/", auth, async (req, res) => {
         include: [{ model: Parent }]
     });
 
-    console.log('All students retrieved!');
-    console.log(allStudents);
-        
-    res.status(200).json(allStudents[0].medication);
+    const studentChart = allStudents.map((announcement) =>
+    announcement.get({ plaing:true})
+    );
 
-    // res.render('teacher', { tablesFormatted, loggedIn: req.session.loggedIn});
+    res.render('teacher', { studentChart, loggedIn: req.session.loggedIn});
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -40,7 +39,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 // teacher posts a new announcement to board
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
 
     // parse new board announcement request body 
@@ -51,16 +50,44 @@ router.post('/', auth, async (req, res) => {
 
         // format date for sequelize
         when: new Date('"'+req.body.when+'"').toISOString().slice(0, 19).replace('T', ' ')
-    })
-
-    console.log('Announcement created!')
-    res.status(200).json(newAnnouncement)
+    });
+    res.status(200).json({newAnnouncement, message : `Created Message!`})
     
     } catch(err) {
-        console.log(err);
-        res.status(400).json(err);
+        res.status(500).json(err);
     };
 });
+
+router.get("/teacherboard", auth, async (req, res) => {
+    try {    
+        const boardData = await Board.findAll({
+            attributes: [
+                'title',
+                'message',
+                'where',
+                // convert dob from sql date format to USA date format 
+                [
+                    sequelize.fn
+                    (
+                      "DATE_FORMAT", 
+                      sequelize.col("when"), 
+                      "%m/%d/%Y"
+                    ),
+                    "when",
+                  ],
+            ],
+        });
+
+        const announcements = boardData.map((announcement) =>
+        announcement.get({ plain: true })
+        );
+        res.render('teacherboard', { announcements});
+
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    };
+})
 
 // update announcement from board
 router.put("/", auth, async (req, res) => {
