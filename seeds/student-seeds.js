@@ -1,4 +1,4 @@
-const { Student } = require('../models');
+aconst { Student } = require('../models');
 
 const studentData = [
   {
