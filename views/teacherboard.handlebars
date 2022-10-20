@@ -1,0 +1,47 @@
+<header>
+  <div class="pt-3 text-center bg-primary opacity-100" style="margin-top: 0px;">
+  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="100" height="100">
+  <h1 class="mb-1 text-light">Teacher's Message Board</h1>
+  <nav class="text-left">
+    <a class="w-5 btn mt-2 mb-2 ml-2 btn-med btn-warning" href="/api/teacher">Go back</a>
+  </nav>
+  </div>
+</header>
+
+<div class="container">
+        <div class="row h-25 d-inline-block">
+
+            <div class="container form-floating h-50 pb-4 col border rounded mt-3 bg-warning mr-30">
+            <h1 class="mt-1 mb-3">Post a message!</h1>
+                <label class="text-left mt-1">Title</label>
+                <input class="form-control w-100 mb-1 text-left " id="titleInput" placeholder="Title"> </input>
+                <label class="text-left mt-1">Message</label>
+                <input class="form-control w-100 mb-1 text-left " id="messageInput" placeholder="Message"> </input>
+                <label class="text-left mt-1">Where</label>
+                <input class="form-control w-100 mb-1 text-left " id="whereInput" placeholder="Where"> </input>
+                <label class="text-left mt-1">When</label>
+                <input class="form-control w-100 mb-1 text-left " id="whenInput" placeholder="YYYY-MM-DD"> </input>
+                <button class="w-75 btn btn-med btn-success updateSubmit mlrb-auto mt-3" type="submit" id="updateSubmit">Submit Message!</button>
+            </div>
+
+            <div class=" form-floating h-50 pb-4 col border rounded mt-3 ml-30">
+                <!-- For each announcement that belongs to the board, the announcement-details partial is used to render each announcement's data -->
+                {{#each announcements as |announcement|}}
+                {{> message-details}}
+                {{/each}}
+            </div>
+
+        </div>
+
+        <div class="flex-row">
+            
+        </div>
+</div>
+<!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- javascript file-->
+<script src="/js/postMessage.js"></script>
+<script src="/js/putMessage.js"></script>
+<script src="/js/deleteMessage.js"></script>

@@ -1,12 +1,11 @@
 const router = require("express").Router();
-const { Student, Teacher, Parent, Board } = require("../../models");
+const { Student, Teacher, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 
 // get their student's info and all announcements from annoucement board
 router.get("/", auth, async (req, res) => {
     try {
-
         // locates one child by its id value
         const studentData = await Student.findOne({
             include: [{ model: Teacher }],
@@ -39,7 +38,11 @@ router.get("/", auth, async (req, res) => {
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
-    } try {    
+    } 
+})
+
+router.get("/board", auth, async (req, res) => {
+    try {    
         const boardData = await Board.findAll({
             attributes: [
                 'title',
@@ -61,16 +64,14 @@ router.get("/", auth, async (req, res) => {
         const announcements = boardData.map((announcement) =>
         announcement.get({ plain: true })
         );
-        res.render('board', { announcements, loggedIn: req.session.loggedIn });
-
-        
+        res.render('board', { announcements});
 
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     };
-
 })
+
 
 // PUT request to update child information data
 router.put('/', auth, async (req, res) => {
@@ -92,7 +93,6 @@ router.put('/', auth, async (req, res) => {
         res.status(500).json(err)
     }
 });
-
 
 // logout, delete session.
 router.post('/', (req, res) => {
