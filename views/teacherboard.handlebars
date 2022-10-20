@@ -9,9 +9,9 @@
 </header>
 
 <div class="container">
-        <div class="row">
+        <div class="row h-25 d-inline-block">
 
-            <div class="container form-floating h-50 pb-4 col border rounded mt-3">
+            <div class="container form-floating h-50 pb-4 col border rounded mt-3 bg-warning mr-30">
             <h1 class="mt-1 mb-3">Post a message!</h1>
                 <label class="text-left mt-1">Title</label>
                 <input class="form-control w-100 mb-1 text-left " id="titleInput" placeholder="Title"> </input>
@@ -24,10 +24,10 @@
                 <button class="w-75 btn btn-med btn-success updateSubmit mlrb-auto mt-3" type="submit" id="updateSubmit">Submit Message!</button>
             </div>
 
-            <div class="col overflow-scroll">
+            <div class=" form-floating h-50 pb-4 col border rounded mt-3 ml-30">
                 <!-- For each announcement that belongs to the board, the announcement-details partial is used to render each announcement's data -->
                 {{#each announcements as |announcement|}}
-                {{> board-details}}
+                {{> post-details}}
                 {{/each}}
             </div>
 
@@ -43,3 +43,4 @@
 
 <!-- javascript file-->
 <script src="/js/postMessage.js"></script>
+<script src="/js/putMessage.js"></script>
