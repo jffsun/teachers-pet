@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Student, Parent, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
-const createTable = require('../../public/js/table.js')
+const sequelize = require('../../config/connection');
 
 // teacher viewing all student records
 router.get("/", auth, async (req, res) => {
@@ -9,7 +9,7 @@ router.get("/", auth, async (req, res) => {
 
     // find all children
     const allStudents = await Student.findAll({
-
+        
         // get these attributes from student table
         attributes: [
             "first_name", 
@@ -17,21 +17,31 @@ router.get("/", auth, async (req, res) => {
             "allergies", 
             "medication", 
             "diet", 
-            "dob", 
+            [
+                sequelize.fn
+                (
+                  "DATE_FORMAT", 
+                  sequelize.col("dob"), 
+                  "%m/%d/%Y"
+                ),
+                "dob",
+            ],
+             
             "school_id", 
             "notes", 
-            "teacher_id"],
-
+            "teacher_id",
+            
+        ],
+    
         // get name column from parent table
-        include: [{ model: Parent }]
+        include: [{ model: Parent }],
     });
+    const studentCharts = allStudents.map((studentChart) =>
+    studentChart.get({ plain:true})
+    );
 
-    console.log('All students retrieved!');
-    console.log(allStudents);
-        
-    res.status(200).json(allStudents[0].medication);
+    res.render('teacher', { studentCharts, loggedIn: req.session.loggedIn});
 
-    // res.render('teacher', { tablesFormatted, loggedIn: req.session.loggedIn});
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
