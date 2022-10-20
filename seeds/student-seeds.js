@@ -1,4 +1,4 @@
-aconst { Student } = require('../models');
+const { Student } = require('../models');
 
 const studentData = [
   {
@@ -10,7 +10,7 @@ const studentData = [
     medication: null,
     diet: null,
     // In YYYY-MM-DD format
-    dob: 2017-07-13,
+    dob: new Date('2017-07-13').toISOString().slice(0, 19).replace('T', ' '),
     notes: null,
     teacher_id: 001,
   },
@@ -21,7 +21,7 @@ const studentData = [
     allergies: null,
     medication: null,
     diet: null,
-    dob: 2017-03-23,
+    dob: new Date('2017-03-23').toISOString().slice(0, 19).replace('T', ' '),
     notes: null,
     teacher_id: 001,
   },
@@ -32,7 +32,7 @@ const studentData = [
     allergies: null,
     medication: null,
     diet: null,
-    dob: 2017-05-15,
+    dob: new Date('2017-05-15').toISOString().slice(0, 19).replace('T', ' '),
     notes: null,
     teacher_id: 001,
   },
@@ -43,7 +43,7 @@ const studentData = [
     allergies: null,
     medication: null,
     diet: null,
-    dob: 2016-12-30,
+    dob: new Date('2016-12-30').toISOString().slice(0, 19).replace('T', ' '),
     notes: null,
     teacher_id: 001,
   },
@@ -54,7 +54,7 @@ const studentData = [
     allergies: null,
     medication: null,
     diet: null,
-    dob: 2016-12-30,
+    dob: new Date('2016-12-30').toISOString().slice(0, 19).replace('T', ' '),
     notes: null,
     teacher_id: 001,
   },
