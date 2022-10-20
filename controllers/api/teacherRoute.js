@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { Student, Parent, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
+const createTable = require('../../public/js/table.js')
 
 // teacher viewing all student records
 router.get("/", auth, async (req, res) => {
@@ -25,18 +26,17 @@ router.get("/", auth, async (req, res) => {
         include: [{ model: Parent }]
     });
 
-    console.log('THIS IS ALL STUDENT DATA---------');
-    console.log(allStudents);
-
     console.log('All students retrieved!');
     console.log(allStudents);
-    res.status(200).json(allStudents);
-    // TO DO: Render to handlebars template
+        
+    res.status(200).json(allStudents[0].medication);
 
+    // res.render('teacher', { tablesFormatted, loggedIn: req.session.loggedIn});
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     };
+    // createTable(allStudents);
 });
 
 // teacher posts a new announcement to board
@@ -114,4 +114,7 @@ router.delete("/", auth, async (req, res) => {
     };
 });
 
+
+
 module.exports = router;
+

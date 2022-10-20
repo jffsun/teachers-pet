@@ -34,7 +34,12 @@ router.get("/", auth, async (req, res) => {
                 school_id: req.session.school_id,
             }
         })
-
+        const studentCard = studentData.get({plain: true});
+        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    } try {    
         const boardData = await Board.findAll({
             attributes: [
                 'title',
@@ -51,23 +56,15 @@ router.get("/", auth, async (req, res) => {
                     "when",
                   ],
             ],
-            raw: true,
-            nest: true,
         });
-        console.log('THIS IS BOARD DATA');
-        console.log(boardData);
 
-        // serialize retrieved student sql data
-        const studentCard = studentData.get({plain: true});
+        const announcements = boardData.map((announcement) =>
+        announcement.get({ plain: true })
+        );
+        res.render('board', { announcements, loggedIn: req.session.loggedIn });
 
-        console.log('STUDENT CARD');
-        console.log(studentCard);
+        
 
-        // render attributes to studentcard.handlebars
-        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
-
-        // TO DO: CREATE PARTIAL HANDLEBAR FOR ANNOUNCEMENT
-        // res.render('board', { boardCard, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
