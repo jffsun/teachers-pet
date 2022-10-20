@@ -5,13 +5,14 @@
     <input class="form-control w-100" id="titleInput{{id}}" value="{{title}}"></input>
 
     <label class="text-left mt-1">Message</label>
-    <input class="form-control w-100" id="messageInput" value="{{message}}"></input>
+    <input class="form-control w-100" id="messageInput{{id}}" value="{{message}}"></input>
 
     <label class="text-left mt-1">Where</label>
-    <input class="form-control w-100" id="whereInput" value="{{where}}"></input>
+    <input class="form-control w-100" id="whereInput{{id}}" value="{{where}}"></input>
 
     <label class="text-left mt-1">When</label>
-    <input class="form-control w-100" id="whenInput" value="{{when}}"></input>
+    <input class="form-control w-100" id="whenInput{{id}}" value="{{when}}"></input>
 
-    <button class="w-75 btn btn-med btn-danger putMessage mlrb-auto mt-3" id="{{id}}" type="submit">Update Message!</button>
+    <button class="w-75 btn btn-med btn-success putMessage mlrb-auto mt-3" id="{{id}}" type="submit">Update Message!</button>
+    <button class="w-75 btn btn-med btn-danger deleteMessage mlrb-auto mt-3" id="{{id}}" type="button">Delete Message</button>           
 </div>
