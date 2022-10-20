@@ -11,6 +11,10 @@ Board.init(
       autoIncrement: true,
       primaryKey: true,
     },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     message: {
       type: DataTypes.STRING,
       allowNull: false,
