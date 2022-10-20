@@ -18,7 +18,7 @@ As a parent user I will be able to update information about my childs medical co
 `npm install`
 
 Dependencies: 
-bootstrap, bcrypt, connect session sequelize, dotenv, express, express-handlebars, express-session, mysql2, sequelize.
+bootstrap, bcrypt, body parser, connect session sequelize, dotenv, express, express-handlebars, express-session, mysql2, nodemon, sequelize.
 
 ## Usage
 The user will need to start a server on a local host (Insomnia) to make requests to the database.
