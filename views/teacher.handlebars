@@ -1,7 +1,7 @@
 <header>
- <div class="p-2 text-center bg-primary opacity-100" style="margin-top: 0px;">
-  <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="150" height="150">
-  <h1 class="mb-3">Teacher's Pet</h1>
+  <div class="p-2 text-center bg-primary opacity-100" style="margin-top: 0px;">
+    <img class="mb-4 align-items-center" src="/images/logo.png" alt="" width="150" height="150">
+    <h1 class="mb-3">Teacher's Pet</h1>
   </div>
 </header>
 
@@ -10,43 +10,25 @@
 </aside>
 
 <main>
-{{!-- this is where the student data table will go --}}
-<h2>Handlebars template to populate a table</h2>
+  {{!-- this is where the student data table will go --}}
+  <h2>Handlebars template to populate a table</h2>
+  <h3>Students</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Allergies</th>
+        <th>Medication</th>
+        <th>Diet</th>
+        <th>DOB</th>
+        <th>School ID</th>
+        <th>NOTES</th>
+        <th>Teacher ID</th>
+      </tr>
 
-<h3>Students</h3>
-<div id="students"></div>
-
-<h3>Smart Phones</h3>
-<div id="smartphones"></div>
-
-<!-- The script element is used to define the Handlebars template -->
-<script type="text/x-handlebars-template" id="tableTemplate">
-<table>
-<thead>
-  <tr>
-    {{#each array.[0]}}
-      <th>{{@key}}</th>
+    </thead>
+    {{#each studentCharts as |studentChart|}}
+    {{>chart}}
     {{/each}}
-  </tr>
-</thead>
-<tbody>
-  {{#each array}}
-    <tr>
-    	{{#each this}}
-        <td>{{this}}</td>
-      {{/each}}
-    </tr>
-  {{/each}}
-</tbody>
-</table>
-</script>
 
-<div style="position: absolute;bottom: 5px;">
-</div>
-</main>
-
-
-<!-- javascript file-->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="js/table.js"></script>
-
+  </table>
