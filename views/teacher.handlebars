@@ -11,10 +11,9 @@
 
 <main>
   {{!-- this is where the student data table will go --}}
-  <h2>Handlebars template to populate a table</h2>
-  <h3>Students</h3>
-  <table>
-    <thead>
+  <h2>Students</h2>
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
       <tr>
         <th>Name</th>
         <th>Allergies</th>
@@ -32,3 +31,6 @@
     {{/each}}
 
   </table>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
