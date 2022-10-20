@@ -1,3 +1,4 @@
+// function that allows teacher to POST on the Message Board
 const postMessage = async (event) => {
     event.preventDefault();
 
@@ -21,7 +22,7 @@ const postMessage = async (event) => {
                 alert("Message created!")
                 document.location.reload();
             } else {
-                alert("Something went wrong. Can't create post");
+                alert("Something went wrong. Can't create message");
             }
            }
         }

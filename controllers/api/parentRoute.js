@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Student, Teacher, Parent, Board } = require("../../models");
+const { Student, Teacher, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 

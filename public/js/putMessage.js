@@ -1,50 +1,39 @@
-const updateMsg = async (event) => {
+// function that allows Teacher to update current POST on the Message Board
+const updateButtons = document.getElementsByClassName("putMessage");
+
+const selectMessage = async (event) => {
     event.preventDefault();
 
-    // const postId = 
-    const title = document.querySelector("#titleInput"+id).value.trim();
-    // Give container the ID, when that container's attribute is typed in, UPDATE, GET container ID, Put request WHERE message ID=ID Clicked
-    // const message = document.querySelector('#messageInput').value.trim();
-    // const where = document.querySelector('#whereInput').value.trim();
-    // const when = document.querySelector('#whenInput').value.trim();
-    console.log(title);
-   
-    const buttons = document.getElementsByTagName("button");
+    // get id of the message clicked 
+    containerID = event.target.id
 
-    const buttonPressed = e => {
-    console.log('THIS IS THE ID VALUE OF BUTTON PRESSED------------');
-    console.log(e.target.id);  // Get ID of Clicked Element
-    }
+    // targets inputs from that selected message
+    const title = $(`#titleInput${containerID}`).val()
+    const message = $(`#messageInput${containerID}`).val()
+    const where = $(`#whereInput${containerID}`).val()
+    const when = $(`#whenInput${containerID}`).val()
+    
+    const response = await fetch('/api/teacher', {
+    method: 'PUT',
+    body: JSON.stringify({
+        id: containerID,
+        title: title,
+        message: message,
+        where: where,
+        when: when
+    }),
+    headers: {'Content-Type': 'application/json'}
+    });
+    if (response.ok) {
+        alert("Message updated!");
+        document.location.reload();
+    } else { 
+        alert("Something went wrong. Can't update message");
+    };
+};
 
-
-    // fetch('/api/teacher', {
-    //     method: 'PUT',
-    //     body: JSON.stringify({
-
-    //         id: id,
-    //         title: title,
-    //         message: message,
-    //         where: where,
-    //         when: when
-    //     }),
-    //     headers: {'Content-Type': 'application/json'}
-    //     }).then(res => {
-    //         if (res.ok) { console.log("Message updated!") }
-    //         else { 
-    //             console.log(res) }
-    //         return res
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => console.log(data))
-    //     .then(alert('Information Updated!'))
-    //     .catch(error => console.log(error));
-
-        for (let button of buttons) {
-            button.addEventListener("click", buttonPressed);
-            }
+// event listener for all 'Update Message!' buttons
+for (let button of updateButtons) {
+    button.addEventListener("click", selectMessage);
 }
-
-
-
-document.querySelector('.putMessage').addEventListener('click', updateMsg);
 
