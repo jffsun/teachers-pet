@@ -9,7 +9,7 @@ router.get("/", auth, async (req, res) => {
 
     // find all children
     const allStudents = await Student.findAll({
-
+        
         // get these attributes from student table
         attributes: [
             "first_name", 
@@ -17,20 +17,35 @@ router.get("/", auth, async (req, res) => {
             "allergies", 
             "medication", 
             "diet", 
-            "dob", 
+            [
+                sequelize.fn
+                (
+                  "DATE_FORMAT", 
+                  sequelize.col("dob"), 
+                  "%m/%d/%Y"
+                ),
+                "dob",
+            ],
+             
             "school_id", 
             "notes", 
-            "teacher_id"],
-
+            "teacher_id",
+            
+        ],
+    
         // get name column from parent table
-        include: [{ model: Parent }]
+        include: [{ model: Parent }],
     });
+    const studentCharts = allStudents.map((studentChart) =>
+    studentChart.get({ plain:true})
+    );
 
     const studentChart = allStudents.map((announcement) =>
     announcement.get({ plaing:true})
     );
 
     res.render('teacher', { studentChart, loggedIn: req.session.loggedIn});
+
     } catch (err) {
         console.log(err)
         res.status(500).json(err)

@@ -4,7 +4,7 @@
   <h1 class="mb-1 text-light">Teacher's Portal</h1>
   <nav class="text-right">
     <a class="w-5 btn mt-2 mb-2 mr-2 btn-med btn-warning" href="/api/teacher/teacherboard"> Message Board</a>
-  </nav>  
+  </nav>
   </div>
 </header>
 
@@ -13,42 +13,24 @@
 </aside>
 
 <main>
-{{!-- this is where the student data table will go --}}
-<h2>Handlebars template to populate a table</h2>
+  {{!-- this is where the student data table will go --}}
+  <h2>Handlebars template to populate a table</h2>
+  <h3>Students</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Allergies</th>
+        <th>Medication</th>
+        <th>Diet</th>
+        <th>DOB</th>
+        <th>School ID</th>
+        <th>NOTES</th>
+        <th>Teacher ID</th>
+      </tr>
 
-<h3>Students</h3>
-<div id="students"></div>
-
-<h3>Smart Phones</h3>
-<div id="smartphones"></div>
-
-<!-- The script element is used to define the Handlebars template -->
-<script type="text/x-handlebars-template" id="tableTemplate">
-<table>
-<thead>
-  <tr>
-    {{#each array.[0]}}
-      <th>{{@key}}</th>
+    </thead>
+    {{#each studentCharts as |studentChart|}}
+    {{>chart}}
     {{/each}}
-  </tr>
-</thead>
-<tbody>
-  {{#each array}}
-    <tr>
-    	{{#each this}}
-        <td>{{this}}</td>
-      {{/each}}
-    </tr>
-  {{/each}}
-</tbody>
-</table>
-</script>
-
-<div style="position: absolute;bottom: 5px;">
-</div>
-</main>
-
-
-<!-- javascript file-->
-<script src="/js/table.js"></script>
-
+  </table>
