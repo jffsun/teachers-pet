@@ -6,11 +6,10 @@
 {{!-- this is the student info update container --}}
 <main class="container child-info-update border border-info rounded">
   <h3 class=""></h3>
-  <h4>School ID: {{school_id}}</h4>
-  <h4>Teacher: {{teacher}}</h4>
-  <h4>Name: {{first_name}} {{last_name}}</h4>
-  <h4>Name: {{dob}}</h4>
-  <input class="form-control" id="allergyInput" placeholder="Allergies"> </input>
+  <h4>Teacher: {{studentCard.teacher.name}}</h4>
+  <h4>Name: {{studentCard.first_name}} {{studentCard.last_name}}</h4>
+  <h4>Date of Birth: {{studentCard.dob}}</h4>
+  <input class="form-control" id="allergyInput" placeholder="Allergies: {{studentCard.allergies}}"> </input>
   <input class="form-control" id="medicationInput" placeholder="Medication"> </input>
   <input class="form-control" id="dietInput" placeholder="Diet"> </input>
   <input class="form-control" id="notesInput" placeholder="Notes"> </input>
