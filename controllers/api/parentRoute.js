@@ -3,16 +3,9 @@ const { Student, Teacher, Parent, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 
-// get all announcements from annoucement board
-// router.get("/", auth, (req, res) => {
-
+// get their student's info and all announcements from annoucement board
 router.get("/", auth, async (req, res) => {
-    
-    // get school_id from session
-    // const schoolID = req.session.school_id;
-
     try {
-        // const getAllAnnouncements = Board.findAll();
 
         // locates one child by its id value
         const studentData = await Student.findOne({
@@ -24,7 +17,6 @@ router.get("/", auth, async (req, res) => {
             'allergies',
             'medication',
             'diet',
-
             // convert dob from sql date format to USA date format 
             [
                 sequelize.fn
@@ -43,25 +35,6 @@ router.get("/", auth, async (req, res) => {
             }
         })
 
-        // serialize retrieved student sql data
-        const studentCard = studentData.get({plain: true});
-
-        console.log('STUDENT CARD');
-        console.log(studentCard);
-
-        // render attributes to studentcard.handlebars
-        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
-    } catch (err) {
-        console.log(err)
-        res.status(500).json(err)
-    };
-});
-
-// GET route for all announcements 
-router.get("/", auth, async (req, res) => {
-    
-    try {
-        // locates one child by its id value
         const boardData = await Board.findAll({
             attributes: [
                 'title',
@@ -78,14 +51,20 @@ router.get("/", auth, async (req, res) => {
                     "when",
                   ],
             ],
+            raw: true,
+            nest: true,
         });
         console.log('THIS IS BOARD DATA');
         console.log(boardData);
 
-        const boardCard = boardData.get({plain: true});
+        // serialize retrieved student sql data
+        const studentCard = studentData.get({plain: true});
 
-        console.log('BOARD CARD');
-        console.log(boardCard);
+        console.log('STUDENT CARD');
+        console.log(studentCard);
+
+        // render attributes to studentcard.handlebars
+        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
 
         // TO DO: CREATE PARTIAL HANDLEBAR FOR ANNOUNCEMENT
         // res.render('board', { boardCard, loggedIn: req.session.loggedIn });
@@ -93,6 +72,7 @@ router.get("/", auth, async (req, res) => {
         console.log(err)
         res.status(500).json(err)
     };
+
 })
 
 // PUT request to update child information data
@@ -115,6 +95,9 @@ router.put('/', auth, async (req, res) => {
         res.status(500).json(err)
     }
 })
+=======
+});
+
 
 // logout, delete session.
 router.post('/', (req, res) => {

@@ -16,8 +16,8 @@ router.post('/parent', async (req, res) => {
 
           console.log(parentCheck.school_id) //make sure to clear
           
-          // Redundant because we already have school_id from parent. Remove?
-            //   const studentCard = await Student.findOne({where: {school_id: parentCheck.school_id}})
+            // Redundant because we already have school_id from parent. Remove?
+            // const studentCard = await Student.findOne({where: {school_id: parentCheck.school_id}})
 
           // Session variables based on the current logged in parent or teacher
           req.session.save(() => {
