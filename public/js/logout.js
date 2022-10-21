@@ -1,4 +1,5 @@
 // Function for Logging Out of the session
+
 async function logout() {
 
     console.log('Logout button clicked');
