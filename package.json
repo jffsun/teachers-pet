@@ -13,6 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "body": "^5.1.0",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^5.2.2",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",
@@ -20,7 +22,6 @@
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
-    "nodemon": "^2.0.20",
     "sequelize": "^6.3.5"
   }
 }
