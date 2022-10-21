@@ -1,5 +1,8 @@
 // Function for Logging Out of the session
+
 async function logout() {
+
+    console.log('Logout button clicked');
     // make a post request to destroy the session on the backend 
       const response = await fetch('/api/parent', {
         method: 'post',
