@@ -4,7 +4,7 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#descriptiont">Description</a></li>
+    <li><a href="#description">Description</a></li>
     <li><a href="#link-to-the-app">Link to the App</a></li>
     <li><a href="#user-story">User Story</a></li>
     <li><a href="#installation">Installation</a></li>
@@ -19,7 +19,7 @@
 
 ## Description
 
-![Teachers Pet](./images/logo.png) "Image of the Teacher's Pet Mascot QuokkaCola") 
+![Teachers Pet](./images/logo.png "Image of the Teacher's Pet Mascot QuokkaCola") 
 
 A classroom helper application that allows parents to submit important student information to their teacher. 
 * This information includes details like allergies, medications, diet, etc.After being submitted, a student's information can be retrieved and updated by their parent at any time as it is stored in a SQL database. 
@@ -96,9 +96,9 @@ If you want to try using the deployed website follow these instructions below!
    ```
 2. Try logging in with one of our user log-ins from the parents seeds!
    ```sh
-  Here is an example:
-  Email: michael.scott@gmail.com
-  Password: michael123
+    Here is an example
+    Email: michael.scott@gmail.com
+    Password: michael123
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
