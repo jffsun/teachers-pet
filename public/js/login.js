@@ -7,8 +7,8 @@ async function parentLogin(event) {
   const password = document.querySelector('#parentPassword').value.trim();
 
   if (email && password) {
-    // send the email and password to the server
-    const response = await fetch('/login/parent', {
+    // Fetch request send the email and password to the server
+    const response = await fetch('/parent', {
       method: 'POST',
       body: JSON.stringify({
         email,
@@ -39,7 +39,7 @@ async function teacherLogin(event) {
 
   if (email && password) {
     // send the email and password to the server
-    const response = await fetch('/login/teacher', {
+    const response = await fetch('/teacher', {
       method: 'POST',
       body: JSON.stringify({
         email,

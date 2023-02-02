@@ -3,7 +3,8 @@ const { Student, Teacher, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 
-// get their student's info and all announcements from annoucement board
+// routes mounted at ('/api/parent')
+// get their student's info and all announcements from announcement board
 router.get("/", auth, async (req, res) => {
     try {
         // locates one child by its id value
@@ -34,7 +35,7 @@ router.get("/", auth, async (req, res) => {
             }
         })
         const studentCard = studentData.get({plain: true});
-        res.render('studentcard', { studentCard, loggedIn: req.session.loggedIn });
+        res.render('parent', { studentCard, loggedIn: req.session.loggedIn });
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -64,14 +65,13 @@ router.get("/board", auth, async (req, res) => {
         const announcements = boardData.map((announcement) =>
         announcement.get({ plain: true })
         );
-        res.render('board', { announcements});
+        res.render('parentboard', { announcements});
 
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     };
 })
-
 
 // PUT request to update child information data
 router.put('/', auth, async (req, res) => {
@@ -95,13 +95,17 @@ router.put('/', auth, async (req, res) => {
 });
 
 // logout, delete session.
-router.post('/', (req, res) => {
+router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
       // Remove the session variables
       req.session.destroy(() => {
         res.status(204).end();
+        console.log('Log Out Success')
       });
     } else {
+      console.log('Log Out Fail - parentRoute.js');
+      console.log('Logged In? ----');
+      console.log(req.session.loggedIn);
       res.status(404).end();
     }
 });

@@ -1,10 +1,9 @@
 // Function for Logging Out of the session
-
-async function logout() {
+async function parentLogOut() {
 
     console.log('Logout button clicked');
     // make a post request to destroy the session on the backend 
-      const response = await fetch('/api/parent', {
+      const response = await fetch('parent/logout', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -12,9 +11,11 @@ async function logout() {
       if (response.ok) {
         // if successfully logged out, redirect to the login page
         document.location.replace('/');
-      } else {
+      } else {  
+        console.log('parentLogOut.js fail')
         alert(response.statusText);
       }
     };
-    
-    document.querySelector('.loggingOut').addEventListener('click', logout);
+  
+    // click .loggingOut element trigger logout()
+    // document.querySelector('#parentLogOut').addEventListener('click', parentLogOut());

@@ -3,6 +3,7 @@ const { Student, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 
+// route mounted at '/api/teacher'
 // teacher viewing all student records
 router.get("/", auth, async (req, res) => {
     try {

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Teacher, Parent, Student} = require("../models");
+const { Teacher, Parent } = require("../models");
 
 // Render login handlebars
 router.post('/parent', async (req, res) => {
@@ -17,6 +17,8 @@ router.post('/parent', async (req, res) => {
           req.session.save(() => {
           req.session.logged_in = true;
           req.session.school_id = parentCheck.school_id;
+          console.log('logged in success');
+          console.log(req.session)
           res.json({ user: parentCheck, message: 'Logged in successfully!'});
           });
           
