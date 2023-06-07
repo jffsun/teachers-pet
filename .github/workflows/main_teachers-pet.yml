@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'teachers-pet'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_412D1E2F83184C67ABF280207CFC2324 }}
           package: .
