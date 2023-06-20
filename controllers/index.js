@@ -2,7 +2,7 @@ const router = require('express').Router();
 const loginRoute = require('./loginRoute.js')
 const apiRoutes = require('./api');
 
-// Root route render the login page
+// Root route renders the login page
 router.get('/', (req, res) => {
     res.render('login');
 });

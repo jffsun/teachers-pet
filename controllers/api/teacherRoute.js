@@ -3,38 +3,34 @@ const { Student, Board } = require("../../models");
 const auth = require('../../utils/auth'); 
 const sequelize = require('../../config/connection');
 
-// route mounted at '/api/teacher'
-// teacher viewing all student records
+/* Route mounted at "/api/teacher"
+Get all students' records */
 router.get("/", auth, async (req, res) => {
     try {
 
-    // find all records for students
+    // Find all records of Student model with specified attributes
     const allStudents = await Student.findAll({
-
-        // get these attributes from student table
         attributes: [
         "first_name", 
         "last_name", 
         "allergies", 
         "medication", 
         "diet", 
-        [
-            sequelize.fn
-            (
-                "DATE_FORMAT", 
-                sequelize.col("dob"), 
-                "%m/%d/%Y"
-            ),
-            "dob",
+        [sequelize.fn(
+            "DATE_FORMAT", 
+            sequelize.col("dob"), 
+            "%m/%d/%Y"),
+            "dob"
         ],
         "notes", 
         "teacher_id",
         ],
     });
+    // Get each student's data and store in "studentCharts" var
     const studentCharts = allStudents.map((studentChart) =>
-    studentChart.get({ plain:true})
+        studentChart.get({ plain:true})
     );
-
+    // Render the teacher Handlebars template with all students' data
     res.render('teacher', { studentCharts, loggedIn: req.session.loggedIn});
 
     } catch (err) {
@@ -43,27 +39,26 @@ router.get("/", auth, async (req, res) => {
     };
 });
 
-// teacher posts a new announcement to board
+// Allows teacher to post a new announcement
 router.post('/', async (req, res) => {
     try {
+        // Announcement's details stored in "newAnnouncement" var 
+        const newAnnouncement = await Board.create({
+            title: req.body.title,
+            message: req.body.message,
+            where: req.body.where,
 
-    // parse new board announcement request body 
-    const newAnnouncement = await Board.create({
-        title: req.body.title,
-        message: req.body.message,
-        where: req.body.where,
+            // Reformat the date so sequelize can store
+            when: new Date('"'+req.body.when+'"').toISOString().slice(0, 19).replace('T', ' ')
+        });
 
-        // format date for sequelize
-        when: new Date('"'+req.body.when+'"').toISOString().slice(0, 19).replace('T', ' ')
-    });
-    res.status(200).json({newAnnouncement, message : `Created Message!`})
-    
+        // If successful, return JSON message with new announcement's details
+        res.status(200).json({newAnnouncement, message : `Created Message!`})
     } catch(err) {
         res.status(500).json(err);
     };
 });
-
-
+// Allows teacher to view all their announcements
 router.get("/teacherboard", auth, async (req, res) => {
     try {    
         const boardData = await Board.findAll({
@@ -72,22 +67,19 @@ router.get("/teacherboard", auth, async (req, res) => {
                 'title',
                 'message',
                 'where',
-                // convert dob from sql date format to USA date format 
-                [
-                    sequelize.fn
-                    (
+                [sequelize.fn(
                       "DATE_FORMAT", 
                       sequelize.col("when"), 
-                      "%m/%d/%Y"
-                    ),
-                    "when",
-                  ],
+                      "%m/%d/%Y"),
+                      "when"
+                ],
             ],
         });
-
+        // Store all announcements and their data in "announcements" var
         const announcements = boardData.map((announcement) =>
-        announcement.get({ plain: true })
+            announcement.get({ plain: true })
         );
+        // Render the teacherboard Handlebars view with announcements data passed
         res.render('teacherboard', { announcements});
 
     } catch (err) {
@@ -96,19 +88,20 @@ router.get("/teacherboard", auth, async (req, res) => {
     };
 })
 
-// update announcement from board
+// Alows teacher to update announcement from board
 router.put("/", auth, async (req, res) => {
     try {
+        // New announcement information stored in "updatedAnnouncement" var
         const updatedAnnouncement = await Board.update(
             {
                 title: req.body.title,
                 messsage: req.body.message,
                 where: req.body.where,
-
-                // format to sql date format
                 when: new Date('"'+req.body.when+'"').toISOString().slice(0, 19).replace('T', ' ')
             },
             {
+            /* Target announcement to update by its ID
+            ID is taken from container clicked in putMessage.js logic */
             where: {
                 id: req.body.id,
             },
@@ -120,21 +113,22 @@ router.put("/", auth, async (req, res) => {
     };
 });
 
-// delete announcement from board
+// Allows teacher to delete an announcement from the announcement board
 router.delete("*", auth, async (req, res) => {
     try {
-
-    const deletedAnnouncement = await Board.destroy({
-        where: {
+        const deletedAnnouncement = await Board.destroy({
+            where: {
             id: req.body.id,
-        },
-    });
-    res.status(200).json(deletedAnnouncement);
+            },
+        });
 
+    res.status(200).json(deletedAnnouncement);
     } catch(err) {
         console.log(err);
         res.status(500).json(err);
     };
 });
+
+// TO DO: Log out for teacher
 
 module.exports = router;

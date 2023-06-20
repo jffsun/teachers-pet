@@ -1,9 +1,10 @@
+// Function redirects user to the root route "/" login page if not logged into a session
 const auth = (req, res, next) => {
-    // If the user has not logged in, redirect to the login page
 
     if (!req.session.logged_in) {
       res.redirect('/');
-    // Else go to the next instance
+
+    // If logged in, continue
     } else {
       next();
     }

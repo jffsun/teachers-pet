@@ -29,7 +29,7 @@ router.post('/parent', async (req, res) => {
 
 router.post('/teacher', async (req, res) => {
      try {
-         // find the teacher who matches with the email and password in the database
+         // Find the teacher who matches with the email and password in the database
          const teacherCheck = await Teacher.findOne({ where: {email:  req.body.email, password: req.body.password}});
         
          // if there is no match with the username, send a incorrect message to the user and have them retry

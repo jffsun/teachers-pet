@@ -1,3 +1,4 @@
+// Set up Sequelize so we can interact with MySQL database with Javascript 
 const Sequelize = require('sequelize');
 const dotenv = require('dotenv').config();
 let sequelize;
