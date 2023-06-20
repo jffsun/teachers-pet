@@ -1,8 +1,9 @@
-// function to begin LOGIN and credential verification
+// Function verifies crendentials and logs parent in
 async function parentLogin(event) {
-  // stop the browser from submitting the form so we can do so with javascript
+
+  // Stop the browser from submitting the form before we get form values 
   event.preventDefault();
-  // gather data from the form elements on the page
+
   const email = document.querySelector('#parentEmail').value.trim();
   const password = document.querySelector('#parentPassword').value.trim();
 

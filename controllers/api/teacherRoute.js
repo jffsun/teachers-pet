@@ -31,7 +31,7 @@ router.get("/", auth, async (req, res) => {
         studentChart.get({ plain:true})
     );
     // Render the teacher Handlebars template with all students' data
-    res.render('teacher', { studentCharts, loggedIn: req.session.loggedIn});
+    res.render('teacher', { studentCharts, logged_in: req.session.logged_in});
 
     } catch (err) {
         console.log(err)

@@ -39,7 +39,7 @@ router.get("/", auth, async (req, res) => {
 
         /* Render the parent Handlebars template with student's data passed in
         Also pass whether user is logged in for authorization */
-        res.render('parent', { studentCard, loggedIn: req.session.loggedIn });
+        res.render('parent', { studentCard, logged_in: req.session.logged_in });
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -102,15 +102,23 @@ router.put('/', auth, async (req, res) => {
 });
 
 // Parent logs out by destroying current session
-router.post('/logout', (req, res) => {
-    if (req.session.loggedIn) {
-      req.session.destroy(() => {
-        res.status(204).end();
-      });
-    // If user was not logged in send 4040
-    } else {
-      res.status(404).end();
-    }
+router.post('/logout', auth, async (req, res) => {
+    try {
+        
+        console.log(req.session.logged_in);
+
+        if (req.session.logged_in) {
+            req.session.destroy(() => {
+                res.status(204).end();
+            });
+        // If user was not logged in send 404
+        } else {
+            res.status(404).end();
+            console.log("logout fail");
+        }
+    } catch(err) {
+        res.status(500).json(err)
+    };
 });
 
 module.exports = router;

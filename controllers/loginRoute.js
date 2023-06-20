@@ -1,13 +1,12 @@
 const router = require('express').Router();
 const { Teacher, Parent } = require("../models");
 
-// Render login handlebars
+// Post 
 router.post('/parent', async (req, res) => {
      try {
-          // Find the parent who matches with the email in the database
+          // Find parent in db from email and password
           const parentCheck = await Parent.findOne({where: {email:  req.body.email, password: req.body.password}});
   
-          // If there is no match with the username, send a incorrect message to the user and have them retry
           if (!parentCheck) {
                res.status(401).json({ message: 'Incorrect email or password, please try again.' });
                return; 
@@ -17,7 +16,7 @@ router.post('/parent', async (req, res) => {
           req.session.save(() => {
           req.session.logged_in = true;
           req.session.school_id = parentCheck.school_id;
-          console.log('logged in success');
+          console.log('logged in success- SESSION INFO BELOW');
           console.log(req.session)
           res.json({ user: parentCheck, message: 'Logged in successfully!'});
           });
