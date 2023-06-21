@@ -1,20 +1,19 @@
 // Log out of the session as teacher
-async function teacherLogout() {
-
-  console.log('Logout button clicked');
-  // make a post request to destroy the session on the backend 
-    const response = await fetch('api/teacher/logout', {
-      method: 'post',
+async function teacherLogOut() {
+  try {
+    // Send request to backend destroy session
+    const response = await fetch('teacher/logout', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     });
-  
+
     if (response.ok) {
-      // if successfully logged out, redirect to the login page
       document.location.replace('/');
-    } else {  
-      console.log('teacherLogOut.js fail')
+    } else {
+      console.log('teacherLogOut.js fail');
       alert(response.statusText);
     }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
-
-  document.querySelector('#teacherLogOut').addEventListener('click', teacherLogOut());

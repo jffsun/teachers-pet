@@ -10,7 +10,6 @@ async function parentLogOut() {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      console.log('parentLogOut.js fail');
       alert(response.statusText);
     }
   } catch (error) {

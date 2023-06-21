@@ -129,6 +129,24 @@ router.delete("*", auth, async (req, res) => {
     };
 });
 
-// TO DO: Log out for teacher
+// Parent logs out by destroying current session
+router.post('/logout', auth, async (req, res) => {
+    try {
+        
+        console.log(req.session.logged_in);
+
+        if (req.session.logged_in) {
+            req.session.destroy(() => {
+                res.status(204).end();
+            });
+        // If user was not logged in send 404
+        } else {
+            res.status(404).end();
+            console.log("logout fail");
+        }
+    } catch(err) {
+        res.status(500).json(err)
+    };
+});
 
 module.exports = router;
